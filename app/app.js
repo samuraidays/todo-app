@@ -6,6 +6,7 @@ require("dotenv").config();
 const PORT = 8100;
 
 app.use(express.json());
+app.use(express.static("./public"));
 
 // ルーティング
 app.use("/api/v1/tasks", taskRoute);
