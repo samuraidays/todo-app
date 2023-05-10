@@ -1,7 +1,12 @@
 const Task = require("../models/Task");
 
-const getAllTasks = (req, res) => {
-    res.send('タスクをすべて取得しました')
+const getAllTasks = async (req, res) => {
+    try {
+        const allTask = await Task.find({});
+        res.status(200).json(allTask);
+    } catch (error) {
+        res.status(500).json(error);
+    }
 }
 
 const createTask = async (req, res) => {
@@ -11,19 +16,48 @@ const createTask = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-
 };
 
-const getSingleTask = (req, res) => {
-    res.send('タスクを取得しました')
+const getSingleTask = async (req, res) => {
+    try {
+        const singleTask = await Task.findOne({ _id: req.params.id });
+        if(!singleTask){
+            return res.status(404).json(`_id:${req.params.id}は存在しません`);
+        }
+        res.status(200).json(singleTask);
+    } catch (error) {
+        res.status(500).json(error);
+    }
 }
 
-const updateTask = (req, res) => {
-    res.send('タスクを取得しました')
+const updateTask = async (req, res) => {
+    try {
+        const updateTask = await Task.findOneAndUpdate(
+            { _id: req.params.id},
+            req.body,
+            {
+                new: true
+            }
+         );
+         if(!updateTask){
+            return res.status(404).json(`_id:${req.params.id}は存在しません`);
+        }
+        res.status(200).json(updateTask);
+    } catch (error) {
+        res.status(500).json(error);
+    }
 }
 
-const deleteTask = (req, res) => {
-    res.send('タスクを取得しました')
+const deleteTask = async (req, res) => {
+    try {
+        const deleteTask = await Task.findOneAndDelete({ _id: req.params.id });
+         if(!deleteTask){
+            return res.status(404).json(`_id:${req.params.id}は存在しません`);
+        }
+        res.status(200).json(deleteTask);
+    } catch (error) {
+        res.status(500).json(error);
+    }
 }
 
 module.exports = {
