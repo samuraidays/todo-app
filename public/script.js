@@ -17,7 +17,7 @@ const showTasks = async () => {
         const allTasks = tasks
             .map((task) => {
                 const { completed, _id, name } = task;
-                return `<div class="single-task ${completed && "task-completed"}">
+                return `<div class="single-task ${completed && "task-completed"}" draggable="true">
             <h5>
                 <span><i class="far fa-check-circle"></i></span>${name}
             </h5>
@@ -75,3 +75,10 @@ tasksDOM.addEventListener("click", async(event) => {
         }
     }
 });
+
+// drug and drop
+$(function() {
+    $(".tasks").sortable({
+      items: ".single-task"
+    });
+  });
