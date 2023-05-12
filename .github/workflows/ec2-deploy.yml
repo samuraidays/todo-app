@@ -21,7 +21,7 @@ jobs:
        uses: actions/checkout@v3
 
      # OIDCでのAWS認証
-     - name: AWS set Credentials
+     - name: AWS OIDC
        uses: aws-actions/configure-aws-credentials@v2
        with:
           aws-region: 'ap-northeast-1'
