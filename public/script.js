@@ -82,6 +82,5 @@ $(function() {
       items: ".single-task",
       axis: "y",
       Animation: 100,
-      distance: 1,
     });
   });
