@@ -22,6 +22,11 @@ jobs:
      - name: Checkout
        uses: actions/checkout@v3
 
+     # npm audit  
+     - name: Audit Dependency
+        run: |
+          npm audit --audit-level high --omit=dev
+
      # OIDCでのAWS認証
      - name: AWS OIDC
        uses: aws-actions/configure-aws-credentials@v2
